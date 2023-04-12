@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-secondary">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="{{path('show_home')}}">Newspaper</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,3 +54,13 @@
 		</div>
 	</div>
 </nav>
+<div class="bg-light">
+	{{ render(url('render_categories_in_nav')) }}
+
+</div>
+
+{#  L'appel de l'action se fera de manière statique (::) et il faudra renseigner le namespace du Controller.
+        Vous DEVREZ mettre 2 backslash pour cet appel.
+        
+        {{ render(controller('App\\Controller\\RenderController::renderCategoriesInNav')) }}
+    #}
