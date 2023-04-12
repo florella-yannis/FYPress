@@ -33,7 +33,7 @@ class UserController extends AbstractController
             $repository->save($user, true);
 
             $this->addFlash('succes',"Votre inscription a été correctement enregistrée.");
-            return $this->redirectToRoute('show_home');
+            return $this->redirectToRoute('show_dashboard');
         }
 
         
