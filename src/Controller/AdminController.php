@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\Category;
 use App\Entity\User;
 use App\Repository\UserRepository;
@@ -27,11 +28,6 @@ class AdminController extends AbstractController
         }
 
         $categories = $entityManager->getRepository(Category::class)->findBy(['deletedAt' => null]);
-<<<<<<< Updated upstream
-
-        return $this->render('admin/show_dashboard.html.twig', [
-            'categories' => $categories
-=======
         $articles = $entityManager->getRepository(Article::class)->findBy(['deletedAt' => null]);
         $users = $entityManager->getRepository(User::class)->findBy(['deletedAt' => null]);
 
@@ -39,7 +35,6 @@ class AdminController extends AbstractController
             'categories' => $categories,
             'articles' => $articles,
             'users' => $users
->>>>>>> Stashed changes
         ]);
     } // end showDashboard()
 
@@ -47,19 +42,11 @@ class AdminController extends AbstractController
     public function showArchives(EntityManagerInterface $entityManager): Response
     {
         $categories = $entityManager->getRepository(Category::class)->findAllArchived();
-<<<<<<< Updated upstream
-
-
-        return $this->render('admin/show_archive.html.twig', [
-            'categories' => $categories
-=======
         $articles = $entityManager->getRepository(Article::class)->findAllArchived();
-
 
         return $this->render('admin/show_archive.html.twig', [
             'categories' => $categories,
             'articles' => $articles
->>>>>>> Stashed changes
         ]);
     } // end showArchives()
 
