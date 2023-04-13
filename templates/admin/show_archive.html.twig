@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Voir les archives{% endblock %}
+{% block title %}Tableau de bord{% endblock %}
 
 {% block body %}
 
-    <h1 class="text-center my-3 text-warning">Les Archives</h1>
+    <h1 class="text-center my-3">Tableau de bord</h1>
 
     {# ################# FLASHES ################# #}
     <div class="row">
@@ -18,8 +18,14 @@
 
     {# ################# BUTTONS ################# #}
     <div class="row my-5 mx-auto">
-        <div class="col-4">
-            <a class="btn btn-sm btn-outline-dark" href="{{ path('show_dashboard') }}"><i class="bi bi-arrow-left-circle"></i> Retour au tableau de bord</a>
+        <div class="col-2">
+            <a class="btn btn-sm btn-outline-dark" href="{{ path('create_article') }}">Ajouter un article</a>
+        </div>
+        <div class="col-2">
+            <a class=" btn btn-sm btn-outline-dark" href="{{ path('create_category') }}">Ajouter une catégorie</a>
+        </div>
+        <div class="col-2">
+            <a class="btn btn-sm btn-outline-dark" href="{{ path('show_archive') }}">Voir les archives</a>
         </div>
     </div>
     {# ################# BUTTONS ################# #}
@@ -30,8 +36,52 @@
     <div class="row">
         <div class="col-10 mx-auto my-4">
 
-            <h2 class="text-center">Tous les articles archivés</h2>
+            <h2 class="text-center">Tous les articles</h2>
 
+<<<<<<< Updated upstream
+=======
+            <table class="table">
+
+                <thead>
+                <tr class="text-center">
+                    <th>#</th>
+                    <th>Titre</th>
+                    <th>Catégorie</th>
+                    <th>Photo</th>
+                    <th>Auteur</th>
+                    <th>Commenté</th>
+                    <th>Créé le</th>
+                    <th>Modifié le</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                    {% for article in articles %}
+
+                        <tr class="text-center align-middle">
+
+                            <td>{{ article.id }}</td>
+                            <td>{{ article.title | length > 20 ? article.title | slice(0,20) ~ '...' : article.title }}</td>
+                            <td>{{ article.category.name }}</td>
+                            <td><img width="150" height="150" class="img-fluid" src="{{ asset('uploads/' ~ article.photo) }}" alt="{{ article.title }}"></td>
+                            <td>{{ article.author.fullname }}</td>
+                            <td>{{ article.commentaries is empty ? 'Non' : 'Oui' }}</td>
+                            <td>{{ article.createdAt | date('d/m/Y') }}</td>
+                            <td>{{ article.updatedAt | date('d/m/Y') }}</td>
+                            <td>
+                                <a href="{{ path('update_article', {'id': article.id}) }}" class="btn btn-sm btn-info" title="Modifier"><i class="bi bi-pencil-square"></i></a>
+                                <a href="{{ path('soft_delete_article', {'id': article.id}) }}" class="btn btn-sm btn-danger" title="Archiver"><i class="bi bi-trash3"></i></a>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+>>>>>>> Stashed changes
         </div>
     </div>
     {# ################# TABLE 1 ################# #}
@@ -42,7 +92,9 @@
         {# ################# TABLE 2 ################# #}
         <div class="col-6">
 
-            <h2 class="text-center">Toutes les catégories archivées</h2>
+            <h2 class="text-center">Toutes les catégories</h2>
+
+        {# EXERCICE : Faire une table HTML qui affichera toutes les catégories de la BDD #}
 
              <table class="table">
                 <thead>
@@ -56,7 +108,7 @@
                 </thead>
                 <tbody>
 
-                {% for category in categories %}
+                    {% for category in categories %}
 
                         <tr class="text-center">
                             <td>{{ category.id }}</td>
@@ -64,13 +116,21 @@
                             <td>{{ category.alias }}</td>
                             <td>{{ category.createdAt | date('d/m/Y') }}</td>
                             <td>
+<<<<<<< Updated upstream
                                 <a href="{{ path('restore_category', {'id': category.id})}}" class="text-info" title="Restaurer la catégorie"></a>
                                 <a href="{{ path('hard_delete_category', {'id': category.id})}}" class="text-danger" title="Supprimer définitivement la catégorie" onclick="return confirm('Voulez-vous vraiment supprimer définitivement cette catégorie ?')"><i class="bi bi-x-circle"></i></a>
                             </td>
                         </tr>
 
                     {% endfor %}
+=======
+                                <a href="{{ path('update_category', {'id': category.id}) }}" class="text-info" title="Modifier la catégorie"><i class="bi bi-pencil-square"></i></a>
+                                <a href="{{ path('soft_delete_category', {'id': category.id}) }}" class="text-danger" title="Archiver la catégorie"><i class="bi bi-trash3"></i></a>
+                            </td>
+                        </tr>
+>>>>>>> Stashed changes
 
+                    {% endfor %}
                 </tbody>
             </table>
 
@@ -81,7 +141,48 @@
 
         {# ################# TABLE 3 ################# #}
         <div class="col-6">
-            <h2 class="text-center">Tous les utilisateurs archivés</h2>
+            <h2 class="text-center">Tous les utilisateurs</h2>
+
+            <table class="table">
+                <thead>
+                <tr class="text-center">
+                    <th>#</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Rôle</th>
+                    <th>Auteur</th>
+                    <th>Créé le</th>
+                    <th>Modifié le</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for user in users %}
+
+                    <tr class="text-center">
+
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.firstname }}</td>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.roles | first }}</td>
+                        <td>{{ user.articles is empty ? 'NON' : 'OUI' }}</td>
+                        <td>{{ user.createdAt | date('d/m/Y') }}</td>
+                        <td>{{ user.updatedAt | date('d/m/Y') }}</td>
+                        <td>
+                            <a href="{{ path('modify_user_role', {'id': user.id}) }}" class="btn btn-sm btn-info" title="Modifier le rôle"><i class="bi bi-pencil-square"></i></a>
+                            <a href="" class="btn btn-sm btn-danger" title="Bannir"><i class="bi bi-slash-circle"></i></a>
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
 
         </div>
         {# ################# TABLE 3 ################# #}
