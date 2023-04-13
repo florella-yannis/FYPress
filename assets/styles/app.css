@@ -22,3 +22,7 @@ body {
     border-bottom: 2px solid rgb(255, 174, 0) !important;
     transition:  ease-in-out 0.2s;
 }
+
+.img-custom{
+    object-fit: cover;
+}
