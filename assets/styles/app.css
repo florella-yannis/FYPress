@@ -11,6 +11,7 @@ html, body{
 body {
     display: flex;
     flex-direction: column;
+    background-color: #dadada;
 }
 
 .content{
@@ -26,3 +27,4 @@ body {
 .img-custom{
     object-fit: cover;
 }
+

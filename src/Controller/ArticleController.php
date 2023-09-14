@@ -25,10 +25,8 @@ class ArticleController extends AbstractController
 
         $form = $this->createForm(ArticleFormType::class, $article)
             ->handleRequest($request);
-
-
+            
         if ($form->isSubmitted() && $form->isValid()) {
-
             $article->setCreatedAt(new DateTime());
             $article->setUpdatedAt(new DateTime());
 
