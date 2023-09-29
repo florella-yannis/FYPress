@@ -20,7 +20,7 @@ class DefaultController extends AbstractController
         return $this->render('default/show_home.html.twig', [
             'articles' => $articles
         ]);
-    } // end function showHome()
+    } 
 
     #[Route('/voir-articles/{alias}', name: 'show_articles_from_cat', methods: ['GET'])]
     public function showArticlesFromCategory(Category $category, ArticleRepository $articleRepository): Response
@@ -34,7 +34,7 @@ class DefaultController extends AbstractController
             'articles' => $articles,
             'category' => $category
         ]);
-    } // end showFromCat()
+    }
 
     #[Route('/{cat_alias}/{art_alias}_{id}.html', name: 'show_article', methods: ['GET'])]
     public function showArticle(Article $article, CommentaryRepository $commentaryRepository): Response
@@ -46,4 +46,4 @@ class DefaultController extends AbstractController
             'commentaries'=>$commentaries
         ]);
     }
-} // end class
+} 
